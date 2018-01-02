@@ -3,7 +3,6 @@ ParticleSystem ps;
 void setup() {
   size(500, 500);
   ps = new ParticleSystem();
-
   init();
 }
 
@@ -18,6 +17,9 @@ void draw() {
 }
 
 void init() {
+  Particle p0 = new Particle(new PVector(width / 2, height / 2));
+  p0.setWeight(10000);
+  ps.addParticle(p0);
   for (int i = 0; i < 100; i++) {
     float posBAngle = random(0, TWO_PI);
     float posBLength = random(0, 100);
