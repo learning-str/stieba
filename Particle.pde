@@ -1,10 +1,10 @@
 class Particle {
   ArrayList<Field> fields = new ArrayList<Field>();
   private PVector position;  // [px]
-  PVector velocity;  // [px/frm]
-  PVector force;  // [kg*px/frm/frm]
-  float weight;  // [kg]
-  float size;
+  private PVector velocity;  // [px/frm]
+  private PVector force;  // [kg*px/frm/frm]
+  private float weight;  // [kg]
+  private float size;
 
   Particle(PVector position) {
     force = new PVector(0.0, 0.0);
@@ -24,7 +24,8 @@ class Particle {
 
   void update() {
     for (Field f : fields) {
-      f.getForce(this);
+      force.add(f.getForce(this));
+
     }
     velocity.add(PVector.div(force, weight));
     position.add(velocity);
@@ -41,5 +42,6 @@ class Particle {
   }
 
   PVector position() { return position; }
+  PVector velocity() { return velocity; }
   void setWeight(float weight) { this.weight = weight; }
 }

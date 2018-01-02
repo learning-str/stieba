@@ -1,8 +1,10 @@
 ParticleSystem ps;
+CustomField field;
 
 void setup() {
   size(500, 500);
   ps = new ParticleSystem();
+  field = new CustomField();
   init();
 }
 
@@ -19,6 +21,7 @@ void draw() {
 void init() {
   Particle p0 = new Particle(new PVector(width / 2, height / 2));
   p0.setWeight(10000);
+  p0.addField(field);
   ps.addParticle(p0);
   for (int i = 0; i < 100; i++) {
     float posBAngle = random(0, TWO_PI);
@@ -30,10 +33,11 @@ void init() {
       Repulsive r = new Repulsive(p, ps.particle(j), 100, 0.01);
       ps.addMutual(r);
     }
-    if(ps.particleNum() != 0) {
-      Spring s = new Spring(p, ps.particle(0), 100, 0.01);
+    if (ps.particleNum() != 0) {
+      Spring s = new Spring(p, ps.particle(0), posBLength / 2, 0.01);
       ps.addMutual(s);
     }
+    p.addField(field);
     ps.addParticle(p);
   }
 }
