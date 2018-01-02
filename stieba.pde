@@ -23,21 +23,29 @@ void init() {
   p0.setWeight(10000);
   p0.addField(field);
   ps.addParticle(p0);
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 200; i++) {
     float posBAngle = random(0, TWO_PI);
-    float posBLength = random(0, 100);
+    float posBLength = random(20, 100);
     PVector pos = new PVector(width / 2 + posBLength * cos(posBAngle),
       height / 2 + posBLength * sin(posBAngle));
     Particle p = new Particle(pos);
     for (int j = 0; j < ps.particleNum(); j++) {
-      Repulsive r = new Repulsive(p, ps.particle(j), 100, 0.01);
+      Repulsive r = new Repulsive(p, ps.particle(j), 100, 0.1);
       ps.addMutual(r);
     }
     if (ps.particleNum() != 0) {
-      Spring s = new Spring(p, ps.particle(0), posBLength / 2, 0.01);
+      Spring s = new Spring(p, ps.particle(0), posBLength, 0.1);
       ps.addMutual(s);
     }
+    field = new CustomField();
     p.addField(field);
     ps.addParticle(p);
+  }
+}
+
+void mouseMoved() {
+  if (ps.particleNum() != 0) {
+    Particle p0 = ps.particle(0);
+    p0.setPosition(new PVector(mouseX, mouseY));
   }
 }

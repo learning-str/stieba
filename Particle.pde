@@ -44,4 +44,5 @@ class Particle {
   PVector position() { return position; }
   PVector velocity() { return velocity; }
   void setWeight(float weight) { this.weight = weight; }
+  void setPosition(PVector position) { this.position = position; }
 }
