@@ -1,4 +1,4 @@
-class Spring {
+class Spring extends MutualForce {
   Particle particleA;
   Particle particleB;
   float springLength;

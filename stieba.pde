@@ -24,6 +24,14 @@ void init() {
     PVector pos = new PVector(width / 2 + posBLength * cos(posBAngle),
       height / 2 + posBLength * sin(posBAngle));
     Particle p = new Particle(pos);
+    for (int j = 0; j < ps.particleNum(); j++) {
+      Repulsive r = new Repulsive(p, ps.particle(j), 100, 0.01);
+      ps.addMutual(r);
+    }
+    if(ps.particleNum() != 0) {
+      Spring s = new Spring(p, ps.particle(0), 100, 0.01);
+      ps.addMutual(s);
+    }
     ps.addParticle(p);
   }
 }

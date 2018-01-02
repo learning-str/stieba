@@ -1,10 +1,10 @@
 class ParticleSystem {
   ArrayList<Particle> particles;
-  ArrayList<Spring> springs;
+  ArrayList<MutualForce> mutualFrcs;
 
   ParticleSystem() {
     particles = new ArrayList<Particle>();
-    springs = new ArrayList<Spring>();
+    mutualFrcs = new ArrayList<MutualForce>();
   }
 
   void update() {
@@ -12,8 +12,8 @@ class ParticleSystem {
       p.resetForce();
     }
 
-    for (Spring s : springs) {
-      s.update();
+    for (MutualForce m : mutualFrcs) {
+      m.update();
     }
 
     for (Particle p : particles) {
@@ -25,8 +25,8 @@ class ParticleSystem {
     for (Particle p : particles) {
       p.draw();
     }
-    for (Spring s : springs) {
-      s.draw();
+    for (MutualForce m : mutualFrcs) {
+      m.draw();
     }
   }
 
@@ -34,7 +34,15 @@ class ParticleSystem {
     particles.add(p);
   }
 
-  void addSpring(Spring s) {
-    springs.add(s);
+  void addMutual(MutualForce m) {
+    mutualFrcs.add(m);
+  }
+
+  Particle particle(int index) {
+    return particles.get(index);
+  }
+
+  float particleNum() {
+    return particles.size();
   }
 }
