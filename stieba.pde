@@ -21,6 +21,7 @@ void draw() {
 void init() {
   Particle p0 = new Particle(new PVector(width / 2, height / 2));
   p0.addField(field);
+  p0.setWeight(1000);
   ps.addParticle(p0);
   for (int i = 0; i < 200; i++) {
     float posBAngle = random(0, TWO_PI);

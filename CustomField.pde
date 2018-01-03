@@ -1,22 +1,25 @@
 class CustomField extends Field {
-  private float friction;
-  private PVector prevMouse;
+  private float dynamicFriction;
+  private float staticFriction;
 
   public CustomField() {
-    friction = 0.1;
-    randomFriction();
-    prevMouse = new PVector(mouseX, mouseY);
-  }
-
-  private void randomFriction() {
-    friction = pow(random(0.5, 0.9), 2);
+    dynamicFriction = 0.1;
+    staticFriction = 0.3;
   }
 
   public PVector getForce(Particle particle) {
-    PVector velocity = particle.velocity();
-    PVector mouse = new PVector(mouseX, mouseY);
-    PVector force = PVector.sub(mouse, prevMouse).mult(0.2);
-    prevMouse = mouse;
-    return PVector.mult(velocity, -friction).add(force);
+    PVector position = particle.position();
+    float weight = particle.weight();
+    PVector mouseForce = PVector.sub(new PVector(mouseX, mouseY), position);
+    mouseForce.mult(0.01);
+    PVector afterAddedForce = PVector.add(mouseForce, particle.force());
+    if (particle.velocity().mag() < 0.1 &&
+        afterAddedForce.mag() < weight * staticFriction) {
+      PVector frictionForce = particle.velocity().copy().mult(-weight);
+      return PVector.mult(particle.force(), -1).add(frictionForce);
+    } else {
+      PVector velDir = particle.velocity().copy().normalize();
+      return mouseForce.add(velDir.mult(weight * -dynamicFriction));
+    }
   }
 }

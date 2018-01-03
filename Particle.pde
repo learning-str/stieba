@@ -25,7 +25,6 @@ class Particle {
   void update() {
     for (Field f : fields) {
       force.add(f.getForce(this));
-
     }
     velocity.add(PVector.div(force, weight));
     position.add(velocity);
@@ -43,6 +42,8 @@ class Particle {
 
   PVector position() { return position; }
   PVector velocity() { return velocity; }
+  PVector force() { return force; }
+  float weight() { return weight; }
   void setWeight(float weight) { this.weight = weight; }
   void setPosition(PVector position) { this.position = position; }
 }
