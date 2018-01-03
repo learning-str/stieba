@@ -3,6 +3,7 @@ class Spring extends MutualForce {
   Particle particleB;
   float springLength;
   float springiness;
+  private color strokeColor;
 
   Spring(Particle particleA, Particle particleB, float springLength,
       float springiness) {
@@ -10,6 +11,7 @@ class Spring extends MutualForce {
     this.particleB = particleB;
     this.springLength = springLength;
     this.springiness = springiness;
+    strokeColor = color(0, 0, 0);
   }
 
   void update() {
@@ -27,7 +29,7 @@ class Spring extends MutualForce {
 
   void draw() {
     noFill();
-    stroke(0);
+    stroke(strokeColor);
     PVector posA = particleA.position();
     PVector posB = particleB.position();
     line(posA.x, posA.y, posB.x, posB.y);

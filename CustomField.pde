@@ -13,7 +13,7 @@ class CustomField extends Field {
     PVector mouseForce = PVector.sub(new PVector(mouseX, mouseY), position);
     mouseForce.mult(0.01);
     PVector afterAddedForce = PVector.add(mouseForce, particle.force());
-    if (particle.velocity().mag() < 0.1 &&
+    if (particle.velocity().mag() < 0.5 &&
         afterAddedForce.mag() < weight * staticFriction) {
       PVector frictionForce = particle.velocity().copy().mult(-weight);
       return PVector.mult(particle.force(), -1).add(frictionForce);

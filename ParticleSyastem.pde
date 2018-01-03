@@ -22,12 +22,13 @@ class ParticleSystem {
   }
 
   void draw() {
-    for (Particle p : particles) {
+    for (int i = particles.size() - 1; i >= 0; i--) {
+      Particle p = particles.get(i);
       p.draw();
     }
-    for (MutualForce m : mutualFrcs) {
-      m.draw();
-    }
+    // for (MutualForce m : mutualFrcs) {
+    //   m.draw();
+    // }
   }
 
   void addParticle(Particle p) {

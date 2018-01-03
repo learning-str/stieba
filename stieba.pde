@@ -23,7 +23,7 @@ void init() {
   p0.addField(field);
   p0.setWeight(1000);
   ps.addParticle(p0);
-  for (int i = 0; i < 200; i++) {
+  for (int i = 0; i < 1000; i++) {
     float posBAngle = random(0, TWO_PI);
     float posBLength = random(20, 100);
     PVector pos = new PVector(width / 2 + posBLength * cos(posBAngle),
@@ -41,4 +41,12 @@ void init() {
     p.addField(field);
     ps.addParticle(p);
   }
+
+  p0.setSize(20);
+  p0.setFillColor(color(255, 255, 255));
+  p0.setStrokeColor(color(0, 0, 0, 200));
+  Particle p1 = ps.particle(1);
+  p1.setSize(17);
+  p1.setFillColor(color(255, 255, 255));
+  p1.setStrokeColor(color(0, 0, 0, 200));
 }
