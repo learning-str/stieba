@@ -11,7 +11,7 @@ class Particle {
     velocity = new PVector(0.0, 0.0);
     this.position = position.copy();
     size = random(10, 15);
-    weight = size / 10;
+    weight = size / 1;
   }
 
   void resetForce() {

@@ -20,7 +20,6 @@ void draw() {
 
 void init() {
   Particle p0 = new Particle(new PVector(width / 2, height / 2));
-  p0.setWeight(10000);
   p0.addField(field);
   ps.addParticle(p0);
   for (int i = 0; i < 200; i++) {
@@ -40,12 +39,5 @@ void init() {
     field = new CustomField();
     p.addField(field);
     ps.addParticle(p);
-  }
-}
-
-void mouseMoved() {
-  if (ps.particleNum() != 0) {
-    Particle p0 = ps.particle(0);
-    p0.setPosition(new PVector(mouseX, mouseY));
   }
 }
