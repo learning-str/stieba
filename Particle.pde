@@ -1,13 +1,13 @@
-class Particle {
-  ArrayList<Field> fields = new ArrayList<Field>();
-  private PVector position;  // [px]
-  private PVector velocity;  // [px/frm]
-  private PVector force;  // [kg*px/frm/frm]
-  private float weight;  // [kg]
-  private float size;
-  private color fillColor;
-  private color strokeColor;
-  private boolean bStroke;
+abstract class Particle {
+  protected ArrayList<Field> fields = new ArrayList<Field>();
+  protected PVector position;  // [px]
+  protected PVector velocity;  // [px/frm]
+  protected PVector force;  // [kg*px/frm/frm]
+  protected float weight;  // [kg]
+  protected float size;
+  protected color fillColor;
+  protected color strokeColor;
+  protected boolean bStroke;
 
   Particle(PVector position) {
     force = new PVector(0.0, 0.0);
@@ -35,16 +35,7 @@ class Particle {
     position.add(velocity);
   }
 
-  void draw() {
-    if (bStroke) {
-      strokeWeight(10);
-      stroke(strokeColor);
-    } else {
-      noStroke();
-    }
-    fill(fillColor);
-    ellipse(position.x, position.y, size, size);
-  }
+  abstract void draw();
 
   void addField(Field f) {
     fields.add(f);
