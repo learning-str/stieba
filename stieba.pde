@@ -1,11 +1,16 @@
+PShader dithering;
+PImage noiseImage;
 ParticleSystem ps;
-// CustomField field;
 
 void setup() {
-  size(500, 500);
+  size(500, 500, P2D);
+  noiseImage  = loadImage( "noise.jpg" );
+  dithering = loadShader( "dithering.glsl" );
+  dithering.set("sketchSize", float(width), float(height));
+  dithering.set("noiseTexture", noiseImage);
   ps = new ParticleSystem();
-  // field = new CustomField();
   init();
+  noCursor();
 }
 
 void update() {
@@ -16,7 +21,7 @@ void draw() {
   update();
   background(255);
   ps.draw();
-  filter(DILATE);
+  filter(dithering);
 }
 
 void init() {
@@ -24,7 +29,7 @@ void init() {
   CustomField f0 = new CustomField();
   p0.addField(f0);
   p0.setWeight(1000);
-  p0.setSize(20);
+  p0.setSize(25);
   ps.addParticle(p0);
   for (int i = 0; i < 1000; i++) {
     float posBAngle = random(0, TWO_PI);
@@ -34,7 +39,7 @@ void init() {
     Particle p;
     if (i == 0) {
       p = new EyeParticle(pos);
-      p.setSize(20);
+      p.setSize(25);
       } else {
       p = new BodyParticle(pos);
     }
